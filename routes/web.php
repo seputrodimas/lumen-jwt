@@ -11,6 +11,11 @@ $router->get('/', function () use ($router) {
 //$router->get('/auth0/callback',  ['uses' => 'Auth0Controller@callback'])->name('auth0-callback');
 //Route::get('/auth0/callback', [Auth0Controller::class, 'callback'])->name('auth0-callback');
 
+$router->group(['prefix' => 'token'], function () use ($router) {
+    $router->get('handle', ['uses' => 'TokenController@handle']);
+    $router->get('read', ['uses' => 'TokenController@read']); 
+});
+
 $router->group(['prefix' => 'post', 'middleware' => 'auth'], function () use ($router) {
     $router->get('all',  ['uses' => 'PostController@all']);
     $router->post('create', ['uses' => 'PostController@create']);
